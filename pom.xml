@@ -42,6 +42,19 @@
 	</dependencies>
 
 	<build>
+
+		<!-- 一定要声明如下配置-->
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/com/usoft/suntg/xml/*.xml</include>
+				</includes>
+				<!-- 是否替换资源中的属性-->
+				<filtering>false</filtering>
+			</resource>
+		</resources>
+
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

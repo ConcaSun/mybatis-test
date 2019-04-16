@@ -14,20 +14,46 @@
         id, name, tel, email, password, salt
     </sql>
 
+    <insert id="insert" parameterType="com.usoft.suntg.entity.User">
+      <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+        select last_insert_id()
+      </selectKey>
+      inset into t_user (
+        name, tel, email, password, salt
+      ) values (
+        #{name, jdbcType=VARCHAR}, #{tel, jdbcType=VARCHAR}, #{email, jdbcType=VARCHAR},
+        #{password, jdbcType=VARCHAR}, #{salt, jdbcType=VARCHAR}
+      )
+    </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.usoft.suntg.entity.User">
+        update t_user set
+        name = #{name, jdbcType=VARCHAR}, tel = #{tel, jdbcType=VARCHAR}, email = #{email, jdbcType=VARCHAR},
+        password = #{password, jdbcType=VARCHAR}, salt = #{salt, jdbcType=VARCHAR}
+        where id = #{id, jdbcType=INTEGER}
+    </update>
+
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_sql_list"/>
         from
-        USER
+        t_user
         where id = #{id, jdbcType=INTEGER}
     </select>
 
+    <select id="selectPageInfo" resultMap="BaseResultMap">
+        select
+            <include refid="Base_sql_list"/>
+        FROM t_user
+        order by id desc LIMIT #{startNumber, jdbcType=INTEGER}, #{pageSize, jdbcType=INTEGER}
+    </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete from user where id = #{id, jdbcType=INTEGER}
+        delete from t_user where id = #{id, jdbcType=INTEGER}
     </delete>
 
     <delete id="delete" parameterType="com.usoft.suntg.entity.User">
-
+        delete from t_user where id = #{id, jdbcType=INTEGER}
     </delete>
 
 </mapper>
