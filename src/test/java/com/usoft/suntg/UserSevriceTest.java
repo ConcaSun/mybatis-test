@@ -2,6 +2,7 @@ package com.usoft.suntg;
 
 import com.usoft.suntg.entity.User;
 import com.usoft.suntg.mapper.UserMapper;
+import com.usoft.suntg.service.UserService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
@@ -15,12 +16,28 @@ import java.util.List;
 public class UserSevriceTest extends MybatisTestApplicationTests {
 
     @Autowired
-    @SuppressWarnings("SpringJavaAutowiringInspection")
-    private UserMapper userMapper;
+    private UserService userService;
 
     @Test
-    public void test1() {
-        List<User> users = userMapper.selectPageInfo(0, 10);
-        assertTrue(CollectionUtils.isEmpty(users));
+    public void testSaveUser() {
+        User user = new User();
+        user.setName("孙土桂");
+        user.setTel("13266703535");
+        user.setEmail("suntg@usoftchina.com");
+        user.setPassword("");
+        user.setSalt("");
+        userService.saveOrUpdate(user);
+    }
+
+    @Test
+    public void testUpdateUser() {
+        User user = new User();
+        user.setId(1);
+        user.setName("孙土桂");
+        user.setTel("13266703535");
+        user.setEmail("suntg@usoftchina.com");
+        user.setPassword("");
+        user.setSalt("");
+        userService.saveOrUpdate(user);
     }
 }

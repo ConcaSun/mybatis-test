@@ -8,7 +8,7 @@ create table t_user(
   salt varchar(255) not null DEFAULT '',
   create_time TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP on UPDATE CURRENT_TIMESTAMP,
   update_time TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP on UPDATE CURRENT_TIMESTAMP
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT '用户表';
 
 -- enterprise
 create table t_enterprise(
@@ -18,7 +18,7 @@ create table t_enterprise(
   logo varchar(255) not null DEFAULT '',
   create_time TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP on UPDATE CURRENT_TIMESTAMP,
   update_time TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP on UPDATE CURRENT_TIMESTAMP
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT '企业表';
 
 -- user_enterprise
 create table t_user_enterprise(
@@ -26,7 +26,7 @@ create table t_user_enterprise(
   enterprise_id INT NOT NULL ,
   create_time TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP on UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (user_id, enterprise_id)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT '用户企业关系表';
 
 -- bank_account
 create table t_bank_account(
@@ -36,4 +36,4 @@ create table t_bank_account(
   amount INT(11) not null DEFAULT 0,
   create_time TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP on UPDATE CURRENT_TIMESTAMP,
   update_time TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP on UPDATE CURRENT_TIMESTAMP
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT '银行账户表';
