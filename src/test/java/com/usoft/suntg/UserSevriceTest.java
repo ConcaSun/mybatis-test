@@ -24,9 +24,9 @@ public class UserSevriceTest extends MybatisTestApplicationTests {
     @Test
     public void testSaveUser() {
         User user = new User();
-        user.setName("孙土桂");
-        user.setTel("13266703535");
-        user.setEmail("suntg@usoftchina.com");
+        user.setName("刘萌冰");
+        user.setTel("13437145855");
+        user.setEmail("liumb@usoftchina.com");
         user.setPassword("");
         user.setSalt("");
         user = userService.saveOrUpdate(user);

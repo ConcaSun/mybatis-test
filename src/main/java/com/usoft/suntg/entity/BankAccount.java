@@ -9,6 +9,7 @@ public class BankAccount {
     private String code;
     private Integer userId;
     private Double amount;
+    private User user;
 
     public Integer getId() {
         return id;
@@ -40,5 +41,13 @@ public class BankAccount {
 
     public void setAmount(Double amount) {
         this.amount = amount;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

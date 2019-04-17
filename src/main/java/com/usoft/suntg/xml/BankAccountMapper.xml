@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.usoft.suntg.mapper.BankAccountMapper">
+    <resultMap id="BaseResultMap" type="com.usoft.suntg.entity.BankAccount">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="amount" jdbcType="INTEGER" property="amount"/>
+        <association property="user" javaType="com.usoft.suntg.entity.User">
+            <id column="user_id" jdbcType="INTEGER" />
+            <result column="user_name" jdbcType="VARCHAR" />
+            <result column="user_tel" jdbcType="VARCHAR" />
+            <result column="user_email" jdbcType="VARCHAR" />
+        </association>
+    </resultMap>
+    <insert id="insert">
+        <selectKey keyProperty="id" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+        insert into t_bank_account (code, user_id) values (
+          #{code, jdbcType=VARCHAR}, #{userId, jdbcType=INTEGER}
+        )
+    </insert>
+    <update id="updateAmount">
+        update t_bank_account set amount=#{amount, jdbcType=INTEGER} where id = #{id, jdbcType=INTEGER}
+    </update>
+    <delete id="deleteByPrimaryKey">
+        delete from t_bank_account where id = #{id, jdbcType=INTEGER}
+    </delete>
+    <delete id="delete">
+        delete from t_bane_account where id = #{id, jdbcType=INTEGER}
+    </delete>
+    <select id="selectByPrimaryKey" resultType="com.usoft.suntg.entity.BankAccount" resultMap="BaseResultMap">
+        select ba.id, ba.code, ba.amount, u.id as user_id, u.name as user_name, u.tel as user_tel, u.email as user_email
+        from t_bank_account ba, t_user u
+        where ba.user_id=u.id and ba.id=#{id, jdbcType=INTEGER}
+    </select>
+    <select id="selectPageInfo" resultType="com.usoft.suntg.entity.BankAccount" resultMap="BaseResultMap">
+        select ba.id, ba.code, ba.amount, u.id as user_id, u.name as user_name, u.tel as user_tel, u.email as user_email
+        from t_bank_account ba, t_user u
+        where ba.user_id=u.id order by ba.id desc limit #{startNumber, jdbcType=INTEGER}, #{pageSize, jdbcType=INTEGER}
+    </select>
+    <select id="getCount" resultType="java.lang.Integer">
+        select count(1) from t_bank_account
+    </select>
+
+
+</mapper>
