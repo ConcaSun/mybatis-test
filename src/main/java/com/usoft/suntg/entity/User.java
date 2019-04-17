@@ -1,5 +1,7 @@
 package com.usoft.suntg.entity;
 
+import java.util.List;
+
 /**
  * Created by ConcaSun on 2019/4/15.
  */
@@ -11,6 +13,7 @@ public class User {
     private String email;
     private String password;
     private String salt;
+    private List<Enterprise> enterprises;
 
     public Integer getId() {
         return id;
@@ -58,5 +61,13 @@ public class User {
 
     public void setSalt(String salt) {
         this.salt = salt;
+    }
+
+    public List<Enterprise> getEnterprises() {
+        return enterprises;
+    }
+
+    public void setEnterprises(List<Enterprise> enterprises) {
+        this.enterprises = enterprises;
     }
 }

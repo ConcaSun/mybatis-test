@@ -53,4 +53,11 @@ public class UserSevriceTest extends MybatisTestApplicationTests {
         Page<User> page = userService.getUsersByPage(pageParams);
         System.out.println(FastJsonUtil.toJson(page));
     }
+
+    @Test
+    public void testGetUserWithEnterprises() {
+        User user = userService.getUserWithEnterprises(1);
+        System.out.println(FastJsonUtil.toJson(user));
+        assertEquals(2, user.getEnterprises().size());
+    }
 }

@@ -18,6 +18,8 @@ public interface UserMapper {
 
     User selectByPrimaryKey(Integer id);
 
+    User selectEithEnterprisesByPrimaryKey(Integer id);
+
     List<User> selectPageInfo(@Param("startNumber") Integer startNumber, @Param("pageSize") Integer pageSize);
 
     int updateByPrimaryKey(User user);

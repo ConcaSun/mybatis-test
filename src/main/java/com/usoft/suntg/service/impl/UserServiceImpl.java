@@ -54,4 +54,9 @@ public class UserServiceImpl implements UserService {
         Page<User> page = new Page<>(pageParams, totalCount, users);
         return page;
     }
+
+    @Override
+    public User getUserWithEnterprises(Integer id) {
+        return userMapper.selectEithEnterprisesByPrimaryKey(id);
+    }
 }

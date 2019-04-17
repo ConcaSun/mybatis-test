@@ -10,6 +10,14 @@
         <result column="salt" jdbcType="VARCHAR" property="salt"/>
     </resultMap>
 
+    <resultMap id="QueryEnterprisesResultMap" type="com.usoft.suntg.entity.User" extends="BaseResultMap">
+        <collection property="enterprises" javaType="ArrayList" ofType="com.usoft.suntg.entity.Enterprise" >
+            <id column="en_id" jdbcType="INTEGER" property="id" />
+            <result column="en_name" jdbcType="VARCHAR" property="name" />
+            <result column="en_address" jdbcType="VARCHAR" property="address" />
+        </collection>
+    </resultMap>
+
     <sql id="Base_sql_list">
         id, name, tel, email, password, salt
     </sql>
@@ -49,6 +57,12 @@
     </select>
     <select id="getCount" resultType="java.lang.Integer">
         select count(1) from t_user
+    </select>
+
+    <select id="selectEithEnterprisesByPrimaryKey" resultType="com.usoft.suntg.entity.User" resultMap="QueryEnterprisesResultMap">
+      select u.id, u.name, u.tel, u.email, u.password, u.salt, e.id as en_id, e.name as en_name, e.address as en_address from
+          t_user u, t_user_enterprise ue, t_enterprise e
+        where u.id = ue.user_id and ue.enterprise_id = e.id and u.id = #{id, jdbcType=INTEGER}
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">

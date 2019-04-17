@@ -13,4 +13,6 @@ public interface UserService {
 
     Page<User> getUsersByPage(PageParams pageParams);
 
+    User getUserWithEnterprises(Integer id);
+
 }
