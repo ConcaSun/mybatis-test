@@ -1,9 +1,13 @@
 package com.usoft.suntg.entity;
 
+import com.usoft.suntg.utils.BizCodeUtil;
+
 /**
  * Created by ConcaSun on 2019/4/16.
  */
 public class BankAccount {
+
+    public static final String CODE_PREFIX = "CN";
 
     private Integer id;
     private String code;
@@ -49,5 +53,9 @@ public class BankAccount {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public void genCode() {
+        this.code = BizCodeUtil.genBizCode(CODE_PREFIX);
     }
 }

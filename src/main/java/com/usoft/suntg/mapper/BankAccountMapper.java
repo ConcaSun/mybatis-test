@@ -22,6 +22,8 @@ public interface BankAccountMapper {
 
     List<BankAccount> selectPageInfo(@Param("startNumber") Integer startNumber, @Param("pageSize") Integer pageSize);
 
+    List<BankAccount> findByUserId(Integer userId);
+
     int updateAmount(BankAccount bankAccount);
 
     int getCount();
