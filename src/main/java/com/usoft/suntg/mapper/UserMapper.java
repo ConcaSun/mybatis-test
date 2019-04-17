@@ -22,4 +22,6 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User user);
 
+    int getCount();
+
 }

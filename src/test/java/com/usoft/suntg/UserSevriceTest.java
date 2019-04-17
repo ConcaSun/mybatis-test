@@ -2,7 +2,10 @@ package com.usoft.suntg;
 
 import com.usoft.suntg.entity.User;
 import com.usoft.suntg.mapper.UserMapper;
+import com.usoft.suntg.model.Page;
+import com.usoft.suntg.model.PageParams;
 import com.usoft.suntg.service.UserService;
+import com.usoft.suntg.utils.FastJsonUtil;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
@@ -26,7 +29,8 @@ public class UserSevriceTest extends MybatisTestApplicationTests {
         user.setEmail("suntg@usoftchina.com");
         user.setPassword("");
         user.setSalt("");
-        userService.saveOrUpdate(user);
+        user = userService.saveOrUpdate(user);
+        assertEquals(new Integer(1), user.getId());
     }
 
     @Test
@@ -39,5 +43,14 @@ public class UserSevriceTest extends MybatisTestApplicationTests {
         user.setPassword("");
         user.setSalt("");
         userService.saveOrUpdate(user);
+    }
+
+    @Test
+    public void testGetPage() {
+        PageParams pageParams = new PageParams();
+        pageParams.setPageNumber(1);
+        pageParams.setPageSize(10);
+        Page<User> page = userService.getUsersByPage(pageParams);
+        System.out.println(FastJsonUtil.toJson(page));
     }
 }

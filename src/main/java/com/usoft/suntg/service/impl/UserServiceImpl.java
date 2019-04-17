@@ -9,6 +9,8 @@ import com.usoft.suntg.utils.VerifyParamsUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by ConcaSun on 2019/4/16.
  */
@@ -47,6 +49,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Page<User> getUsersByPage(PageParams pageParams) {
-        return null;
+        int totalCount = userMapper.getCount();
+        List<User> users = userMapper.selectPageInfo(pageParams.getStartNumber(), pageParams.getPageSize());
+        Page<User> page = new Page<>(pageParams, totalCount, users);
+        return page;
     }
 }

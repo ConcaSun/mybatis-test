@@ -31,4 +31,8 @@ public class PageParams {
 
     public PageParams() {
     }
+
+    public int getStartNumber() {
+        return pageSize * (pageNumber - 1);
+    }
 }

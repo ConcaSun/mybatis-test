@@ -42,4 +42,14 @@ public class Page<T> {
     public void setContents(List<T> contents) {
         this.contents = contents;
     }
+
+    public Page() {
+    }
+
+    public Page(PageParams pageParams, int totalElement, List<T> contents) {
+        this.pageNumber = pageParams.getPageNumber();
+        this.pageSize = pageParams.getPageSize();
+        this.totalElement = totalElement;
+        this.contents = contents;
+    }
 }
