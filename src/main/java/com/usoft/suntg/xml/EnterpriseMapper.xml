@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.usoft.suntg.mapper.EnterpriseMapper">
+    <resultMap id="BaseResultMap" type="com.usoft.suntg.entity.Enterprise">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="logo" jdbcType="VARCHAR" property="logo"/>
+    </resultMap>
+
+    <sql id="Base_sql_list">
+        id, name, address, logo
+    </sql>
+    <insert id="insert" parameterType="com.usoft.suntg.entity.Enterprise">
+      <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+          select last_insert_id()
+      </selectKey>
+        insert into t_enterprise (name, address, logo) values (#{name, jdbcType=VARCHAR}, #{address, jdbcType=VARCHAR}, #{logo, jdbcType=VARCHAR})
+    </insert>
+    <insert id="addUser">
+        insert into t_user_enterprise (enterprise_id, user_id) values (#{enterpriseId, jdbcType=INTEGER}, #{userId, jdbcType=INTEGER})
+    </insert>
+    <update id="updateByPrimaryKey">
+        UPDATE t_enterprise set name = #{name, jdbcType=VARCHAR},
+            address = #{address, jdbcType=VARCHAR},
+            logo = #{logo, jdbcType=VARCHAR}
+        where id = #{id, jdbcType=INTEGER}
+    </update>
+    <delete id="deleteByPrimaryKey">
+        delete from t_enterprise where id = #{id, jdbcType=INTEGER}
+    </delete>
+    <delete id="delete">
+        delete from t_enterprise where id = #{id, jdbcType=INTEGER}
+    </delete>
+    <delete id="removeUser">
+        delete from t_user_enterprise where enterprise_id = #{enterpriseId, jdbcType=INTEGER} and user_id = #{userId, jdbcType=INTEGER}
+    </delete>
+    <select id="selectByPrimaryKey" resultType="com.usoft.suntg.entity.Enterprise" resultMap="BaseResultMap">
+        select
+            <include refid="Base_sql_list"/>
+        from t_enterprise where id = #{id, jdbcType=INTEGER}
+    </select>
+    <select id="selectPageInfo" resultType="com.usoft.suntg.entity.Enterprise" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_sql_list" />
+        from t_enterprise order by id DESC limit #{startNumber, jdbcType=INTEGER}, #{pageSize, jdbcType=INTEGER}
+    </select>
+    <select id="getCount" resultType="java.lang.Integer">
+        select count(1) from t_enterprise
+    </select>
+
+
+</mapper>

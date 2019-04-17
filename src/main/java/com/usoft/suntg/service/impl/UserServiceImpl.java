@@ -5,6 +5,7 @@ import com.usoft.suntg.mapper.UserMapper;
 import com.usoft.suntg.model.Page;
 import com.usoft.suntg.model.PageParams;
 import com.usoft.suntg.service.UserService;
+import com.usoft.suntg.utils.MyBatisTestRuntimeException;
 import com.usoft.suntg.utils.VerifyParamsUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,11 +29,10 @@ public class UserServiceImpl implements UserService {
             return save(user);
         } else {
             User existUser = userMapper.selectByPrimaryKey(user.getId());
-            if (existUser != null) {
-                return update(user);
-            } else {
-                return save(user);
+            if (existUser == null) {
+                throw new MyBatisTestRuntimeException("要修改的用户不存在，id：" + user.getId());
             }
+            return update(user);
         }
     }
 
