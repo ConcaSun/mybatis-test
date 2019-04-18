@@ -32,7 +32,7 @@
     </appender>
 
     <!-- root与logger类似，它表示根logger，只有大于等于level级别的日志才交由appender处理，level默认为DEBUG -->
-    <root level="INFO">
+    <root level="DEBUG">
         <appender-ref ref="stdout" />
     </root>
 

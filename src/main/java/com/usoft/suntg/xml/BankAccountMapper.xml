@@ -9,10 +9,10 @@
 
     <resultMap id="QueryWithUserResultMap" type="com.usoft.suntg.entity.BankAccount" extends="BaseResultMap">
         <association property="user" javaType="com.usoft.suntg.entity.User">
-            <id column="user_id" jdbcType="INTEGER" />
-            <result column="user_name" jdbcType="VARCHAR" />
-            <result column="user_tel" jdbcType="VARCHAR" />
-            <result column="user_email" jdbcType="VARCHAR" />
+            <id column="user_id" jdbcType="INTEGER" property="id" />
+            <result column="user_name" jdbcType="VARCHAR" property="name" />
+            <result column="user_tel" jdbcType="VARCHAR" property="tel" />
+            <result column="user_email" jdbcType="VARCHAR" property="email" />
         </association>
     </resultMap>
     <insert id="insert">
